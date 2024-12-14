@@ -11,7 +11,7 @@ function Login() {
 	const handleSubmit=async (e)=>{
 		e.preventDefault();
 		try{
-		const result=await axios.post('http://localhost:8080/user/login',{email,password},{
+		const result=await axios.post(`${import.meta.env.VITE_BACKEND}/user/login`,{email,password},{
 			header:{
 				'content-type':'application/json'
 			},

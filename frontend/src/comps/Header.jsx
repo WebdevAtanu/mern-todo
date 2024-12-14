@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 function Header() {
 	const {log,setLog}=useContext(context);
 	const logoutHandler=async ()=>{
-		const {data}=await axios.get('http://localhost:8080/user/logout',{
+		const {data}=await axios.get(`${import.meta.env.VITE_BACKEND}/user/logout`,{
 			withCredentials:true
 		});
 		toast(data.message);

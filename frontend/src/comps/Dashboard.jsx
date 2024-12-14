@@ -11,7 +11,7 @@ function Dashboard() {
 	const [description,setDescription]=useState();
 	const [refresh,setRefresh]=useState(0);
 	useEffect(()=>{
-		axios.get('http://localhost:8080/task/mytask',{
+		axios.get(`${import.meta.env.VITE_BACKEND}/task/mytask`,{
 			withCredentials:true
 		})
 		.then(res=>setTasks(res.data.tasks))
@@ -21,7 +21,7 @@ function Dashboard() {
 	const handleSubmit=async (e)=>{
 		e.preventDefault();
 		try{
-		const result=await axios.post('http://localhost:8080/task/add',{title,description},{
+		const result=await axios.post(`${import.meta.env.VITE_BACKEND}/task/add`,{title,description},{
 			header:{
 				'content-type':'application/json'
 			},
@@ -36,7 +36,7 @@ function Dashboard() {
 
 	const editHandler=async(id)=>{
 		try{
-		const result=await axios.put(`http://localhost:8080/task/${id}`,{},{
+		const result=await axios.put(`${import.meta.env.VITE_BACKEND}/task/${id}`,{
 			withCredentials:true
 		});
 		toast.success(result.data.message);
@@ -48,7 +48,7 @@ function Dashboard() {
 
 	const deleteHandler=async(id)=>{
 		try{
-		const result=await axios.delete(`http://localhost:8080/task/${id}`,{
+		const result=await axios.delete(`${import.meta.env.VITE_BACKEND}/task/${id}`,{
 			withCredentials:true
 		});
 		toast.success(result.data.message);

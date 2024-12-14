@@ -12,7 +12,7 @@ function Register() {
 	const handleSubmit=async (e)=>{
 		e.preventDefault();
 		try{
-		const result=await axios.post('http://localhost:8080/user/new',{name,email,password},{
+		const result=await axios.post(`${import.meta.env.VITE_BACKEND}/user/new`,{name,email,password},{
 			header:{
 				'content-type':'application/json'
 			},

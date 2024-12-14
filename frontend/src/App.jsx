@@ -13,7 +13,7 @@ function App() {
   const [log,setLog]=useState(false);
   const [user,setUser]=useState({});
   useEffect(()=>{
-    axios.get('http://localhost:8080/user/details',{
+    axios.get(`${import.meta.env.VITE_BACKEND}/user/details`,{
       withCredentials:true
     })
     .then(res=>{

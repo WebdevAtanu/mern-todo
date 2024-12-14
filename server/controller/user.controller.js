@@ -30,7 +30,7 @@ export const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
     const user = await user.findOne({ email });
-    if (!user) {
+    if (!user_data) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
@@ -39,7 +39,7 @@ export const loginUser = async (req, res) => {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    sendCookie(process.env.JWT_SECRET,user,res,`User ${user.name} logged in successfully`);
+    sendCookie(process.env.JWT_SECRET,user_data,res,`User ${user.name} logged in successfully`);
   	} catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
   }

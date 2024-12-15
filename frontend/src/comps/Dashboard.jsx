@@ -7,9 +7,10 @@ import toast from 'react-hot-toast';
 function Dashboard() {
 	const {user,log}=useContext(context);
 	const [tasks,setTasks]=useState([]);
-	const [title,setTitle]=useState();
-	const [description,setDescription]=useState();
+	const [title,setTitle]=useState("");
+	const [description,setDescription]=useState("");
 	const [refresh,setRefresh]=useState(0);
+	const [load,setLoad]=useState(false);
 	useEffect(()=>{
 		axios.get(`${import.meta.env.VITE_BACKEND}/task/mytask`,{
 			withCredentials:true
@@ -20,6 +21,7 @@ function Dashboard() {
 
 	const handleSubmit=async (e)=>{
 		e.preventDefault();
+		setLoad(true);
 		try{
 		const result=await axios.post(`${import.meta.env.VITE_BACKEND}/task/add`,{title,description},{
 			header:{
@@ -29,8 +31,10 @@ function Dashboard() {
 		});
 		toast.success(result.data.message);
 		setRefresh(refresh+1);
+		setLoad(false);
 		}catch(error){
 			toast.error('Operation failed');
+			setLoad(false);
 		}
 	}
 
@@ -61,6 +65,7 @@ function Dashboard() {
 	if(!log) return <Navigate to='/'/>
 	return (
 		<div className='dashboard'>
+		<div className="inputs">
 		<div className="user">
 			<h4>user: {user.name}</h4>
 			<h4>email: {user.email}</h4>
@@ -69,8 +74,9 @@ function Dashboard() {
 			<form action="" onSubmit={handleSubmit}>
 				<input type="text" name='name' placeholder='Task name' value={title} onChange={e=>setTitle(e.target.value)} required/>
 				<textarea name="description"  placeholder='Task description' value={description} onChange={e=>setDescription(e.target.value)} required/>
-				<button type='submit'>ADD TASK</button>
+				<button type='submit' disabled={load} aria-busy={load} aria-live="polite">{load ? "wait..." : "Add task"}</button>
 			</form>
+		</div>
 		</div>
 		<div className='showtasks'>
 			{
@@ -80,11 +86,15 @@ function Dashboard() {
 					<div className="card">
 					<div className="cardhead">
 					<h5>serial no: {i+1}</h5>
-					<p><button className='cardbtn' onClick={()=>editHandler(item._id)}><i className="bi bi-check2-square"></i></button><button className='cardbtn' onClick={()=>deleteHandler(item._id)}><i className="bi bi-trash"></i></button></p>
 					</div>
 					<h3>{item.title}</h3>
 					<p>{item.description}</p>
-					<p>status: {item.isComplete?'done':'pending'}</p>
+					<div className="cardbtns">
+					{
+						item.isComplete?<button id='checked' onClick={()=>editHandler(item._id)}>Uncheck</button>:<button id='unchecked' onClick={()=>editHandler(item._id)}>Check</button>
+					}
+					<button id='delete' onClick={()=>deleteHandler(item._id)}>Delete</button>
+					</div>
 					</div>
 					</div>
 					)

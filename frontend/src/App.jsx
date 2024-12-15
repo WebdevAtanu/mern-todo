@@ -2,7 +2,6 @@ import { useState,useEffect } from 'react'
 import './App.css';
 import {BrowserRouter,Route,Routes} from 'react-router-dom';
 import Header from './comps/Header';
-import Home from './comps/Home';
 import Register from './comps/Register';
 import Login from './comps/Login';
 import Dashboard from './comps/Dashboard';
@@ -29,10 +28,8 @@ function App() {
     <BrowserRouter>
     <Header/>
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/register' element={<Register/>}/>
+        <Route path='/' element={log?<Dashboard/>:<Register/>}/>
         <Route path='/login' element={<Login/>}/>
-        <Route path='/dashboard' element={<Dashboard/>}/>
       </Routes>
     </BrowserRouter>
     </context.Provider>

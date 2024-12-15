@@ -1,5 +1,5 @@
 import React,{useContext} from 'react';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import context from '../context';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -19,13 +19,12 @@ function Header() {
 			LOGO
 		</div>
 		<div className='links'>
-			<Link to={'/'}>Home</Link>
 			{
-				log?<Link to={'/dashboard'}>Dashboard</Link>:<Link to={'/register'}>Register</Link>
+				log?<NavLink style={({isActive})=>({color:isActive?'black':'white',background:isActive?'white':'black'})} to={'/'}>Dashboard</NavLink>:<NavLink style={({isActive})=>({color:isActive?'black':'white',background:isActive?'white':'black'})} to={'/'}>Register</NavLink>
 			}
 			
 			{
-				log?<button id='logout' onClick={logoutHandler}>Logout</button>:<Link to={'/login'}>Login</Link>
+				log?<button id='logout' onClick={logoutHandler}>Logout</button>:<NavLink style={({isActive})=>({color:isActive?'black':'white',background:isActive?'white':'black'})} to={'/login'}>Login</NavLink>
 			}
 			
 		</div>

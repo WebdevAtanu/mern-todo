@@ -11,6 +11,7 @@ function Dashboard() {
 	const [description,setDescription]=useState("");
 	const [refresh,setRefresh]=useState(0);
 	const [load,setLoad]=useState(false);
+	const [loader,setLoader]=useState(false);
 	useEffect(()=>{
 		axios.get(`${import.meta.env.VITE_BACKEND}/task/mytask`,{
 			withCredentials:true
@@ -39,6 +40,7 @@ function Dashboard() {
 	}
 
 	const editHandler=async(id)=>{
+		console.log(id)
 		try{
 		const result=await axios.put(`${import.meta.env.VITE_BACKEND}/task/${id}`,{
 			withCredentials:true
@@ -51,14 +53,17 @@ function Dashboard() {
 	}
 
 	const deleteHandler=async(id)=>{
+		setLoader(true);
 		try{
 		const result=await axios.delete(`${import.meta.env.VITE_BACKEND}/task/${id}`,{
 			withCredentials:true
 		});
 		toast.success(result.data.message);
+		setLoader(false);
 		setRefresh(refresh+1);
 		}catch(error){
 			toast.error('Operation failed');
+			setLoader(false);
 		}
 	}
 

@@ -37,7 +37,8 @@ body {
 
 }
 
-.register, .login {
+.register,
+.login {
   padding: 1.5rem;
   margin: 1rem auto;
   max-width: 30vw;
@@ -62,16 +63,19 @@ body {
     & button {
       all: unset;
       border: 0;
-      background:#3b82f6;
-      color:white;
+      background: #3b82f6;
+      color: white;
       padding: 0.3rem 1.5rem;
       cursor: pointer;
       transition: all 0.3s;
-      border-radius:5px;
-      &:hover{
-        transform:scale(1.05);
+      border-radius: 5px;
+
+      &:hover {
+        transform: scale(1.05);
       }
-}
+
+    }
+
   }
 
 }
@@ -98,59 +102,60 @@ body {
 
   & .inputs {
     padding: 0.5rem;
+    width: 50%;
+    margin: auto;
+    border: 1px solid gray;
+    border-radius: 10px;
 
     & .user {
       display: flex;
       justify-content: space-between;
       margin-bottom: 1rem;
+      color:dimgray;
     }
 
   }
 
-  & .addtask {
-    width:50%;
-    margin:auto;
-    & form {
-      display: flex;
-      flex-direction: column;
-      border: 1px solid black;
-      padding: 1rem;
+  & form {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
 
-      & input {
-        padding: 0.5rem;
-        font-family: "Lusitana", system-ui;
-        margin-bottom: 0.5rem;
-        outline: none;
-        border-radius: 0.5rem;
-        border: 1px solid lightgray;
-      }
+    & input {
+      padding: 0.5rem;
+      font-family: "Lusitana", system-ui;
+      margin-bottom: 0.5rem;
+      outline: none;
+      border-radius: 0.5rem;
+      border: 1px solid lightgray;
+    }
 
-      & textarea {
-        resize: none;
-        height: 3rem;
-        padding: 0.5rem;
-        font-family: "Lusitana", system-ui;
-        outline: none;
-        border-radius: 0.5rem;
-        border: 1px solid lightgray;
-      }
+    & textarea {
+      resize: none;
+      height: 3rem;
+      padding: 0.5rem;
+      font-family: "Lusitana", system-ui;
+      outline: none;
+      border-radius: 0.5rem;
+      border: 1px solid lightgray;
+    }
 
-      & button {
-        padding: 0.5rem 1.5rem;
-        border:1px solid gray;
-        background:white;
-        cursor: pointer;
-        text-align: center;
-        font-size: 0.8rem;
-        margin-top: 0.5rem;
-        transition:all 0.2s;
+    & button {
+      width: 50%;
+      margin: auto;
+      padding: 0.5rem 1.5rem;
+      border: 0;
+      background: #3b82f6;
+      color: white;
+      cursor: pointer;
+      text-align: center;
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      transition: all 0.2s;
+      border-radius: 5px;
 
-        &:hover {
-          background: #3b82f6;
-          border:1px solid #3b82f6;
-          color:white;
-        }
-
+      &:hover {
+        transform: scale(1.05);
       }
 
     }
@@ -158,94 +163,123 @@ body {
   }
 
   & .showtasks {
-    h2{
-      text-align:center;
-      margin-bottom:0.5rem;
+    h2 {
+      text-align: center;
+      margin-bottom: 0.5rem;
     }
-    & table{
-      width:100%;
-      border-collapse:collapse;
-      & tr{
-        &:hover{
-          background:#b9b5b536;
+
+    & table {
+      width: 100%;
+      border-collapse: collapse;
+
+      & tr {
+        &:hover {
+          background: #b9b5b536;
         }
-        & th,td{
-        border:1px solid black;
-        padding:0.2rem;
-        & h4{
-          text-align:center;
-        }
-        & button{
-          all:unset;
-          width: calc(100% - 0.6rem);
-          padding: 0.3rem;
-          cursor: pointer;
-          transition:all 0.1s;
-          font-size:1rem;
-          cursor:pointer;
-          text-align:center;
-          &:hover{
-            color:red;
+
+        & th,
+        td {
+          border: 1px solid gray;
+          padding: 0.2rem;
+
+          & h4 {
+            text-align: center;
           }
+
+          & button {
+            all: unset;
+            width: calc(100% - 0.6rem);
+            padding: 0.3rem;
+            cursor: pointer;
+            transition: all 0.1s;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: center;
+
+            &:hover {
+              color: red;
+            }
+
+          }
+
         }
+
       }
+
     }
+
   }
-  }
+
 }
-.generative{
-  padding:0.5rem;
-  text-align:center;
-  & h4{
-    margin-bottom:1rem;
-  }
-  & p{
-    margin-bottom:1rem;
-    text-decoration:underline;
-  }
-  & table{
-      width:70%;
-      margin:auto;
-      border-collapse:collapse;
-      & tr{
-        &:hover{
-          background:#b9b5b536;
-        }
-        & th,td{
-        border:1px solid black;
-        padding:0.2rem;
-        & h4{
-          text-align:center;
-        }
-   button {
-      all: unset;
-      width:calc(100% - 1rem);
-      padding: 0.1rem 0;
-      cursor: pointer;
-      transition: all 0.3s;
-      margin-left:0.5rem;
-      text-align:center;
 
+.generative {
+  padding: 0.5rem;
+  text-align: center;
+
+  & h4 {
+    margin-bottom: 1rem;
+  }
+
+  & p {
+    margin-bottom: 1rem;
+    text-decoration: underline;
+  }
+
+  & table {
+    width: 70%;
+    margin: auto;
+    border-collapse: collapse;
+
+    & tr {
       &:hover {
-        color:dodgerblue;
+        background: #b9b5b536;
+      }
+
+      & th,
+      td {
+        border: 1px solid gray;
+        padding: 0.2rem;
+
+        & h4 {
+          text-align: center;
+        }
+
+        button {
+          all: unset;
+          width: calc(100% - 1rem);
+          padding: 0.1rem 0;
+          cursor: pointer;
+          transition: all 0.3s;
+          margin-left: 0.5rem;
+          text-align: center;
+
+          &:hover {
+            color: dodgerblue;
+          }
+
+        }
+
       }
 
     }
-      }
-    }
+
   }
-  #clear{
-    all:unset;
-    width:calc(30% - 1rem);
-    margin-top:0.5rem;
-    padding:0.3rem;
-    cursor:pointer;
-    border:1px solid;
-    transition:all 0.3s;
-    &:hover{
-      background:#e0e3dc;
+
+  #clear {
+    all: unset;
+    width: calc(30% - 1rem);
+    margin-top: 0.5rem;
+    padding: 0.3rem;
+    cursor: pointer;
+    border: 1px solid;
+    transition: all 0.3s;
+
+    &:hover {
+      background: #e0e3dc;
     }
+
   }
+
 }
 
 @media screen and (max-width:680px) {
@@ -255,19 +289,23 @@ body {
     .showtasks {
       grid-template-columns: auto;
     }
-    .addtask{
-      width:100%;
+
+    .inputs {
+      width: calc(100% - 1rem);
     }
 
   }
 
-  .register, .login {
+  .register,
+  .login {
     max-width: calc(100vw - 5rem);
   }
-  .generative{
-    & table{
-      width:100%;
+
+  .generative {
+    & table {
+      width: 100%;
     }
+
   }
 
 }

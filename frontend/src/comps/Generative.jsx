@@ -43,39 +43,39 @@ export default function Generative(props) {
  
   return (
     <div className='generative'>
-    <h2>Generative todos</h2>
-    <h4>You can ask the AI for any help, just click on the chat box.</h4>
-    {
+      <h2>Generative todos</h2>
+      <h4>You can ask the AI for any help, just click on the chat box.</h4>
+      {
       todos.length!=0?
       <>
       <p>Here is your temporary todo list. from here you can add these todos to your bucket list.</p>
       <table>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Add this task</th>
-      </tr>
-    </thead>
-      <tbody>
-        {
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Add this task</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
           todos?.map((item,i)=>{
-            return(
-              <tr>
-                <td>Task from AI</td>
-                <td>{item}</td>
-                <td><button onClick={()=>handleSubmit(item)} disabled={load} aria-busy={load} aria-live="polite">Add</button></td>
-              </tr>
-            )
+          return(
+          <tr>
+            <td>Task from AI</td>
+            <td>{item}</td>
+            <td><button onClick={()=>handleSubmit(item)} disabled={load} aria-busy={load} aria-live="polite">Add</button></td>
+          </tr>
+          )
           })
-        }
-      </tbody>
-    </table>
-    <button id='clear' onClick={()=>setTodos([])}>Clear all</button>
-    </>
-    :
-    null
-    }
+          }
+        </tbody>
+      </table>
+      <button id='clear' onClick={()=>setTodos([])}>Clear all</button>
+      </>
+      :
+      null
+      }
     </div>
   );
 }

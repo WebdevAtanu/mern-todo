@@ -75,11 +75,11 @@ function Dashboard() {
 		<>
 		<div className='dashboard'>
 		<div className="inputs">
-		<div className="user">
-			<h4>user: {user.name}</h4>
-			<h4>email: {user.email}</h4>
-		</div>
 		<div className='addtask'>
+		<div className="user">
+			<h3>user: {user.name}</h3>
+			<h3>email: {user.email}</h3>
+		</div>
 			<form action="" onSubmit={handleSubmit}>
 				<input type="text" name='name' placeholder='Task name' value={title} onChange={e=>setTitle(e.target.value)} required/>
 				<textarea name="description"  placeholder='Task description' value={description} onChange={e=>setDescription(e.target.value)} required/>

@@ -21,7 +21,7 @@ function Header() {
 		</div>
 		<div className='links'>
 			{
-				log?<NavLink style={({isActive})=>({color:isActive?'#3b82f6':'white', background:isActive?'white':'#3b82f6'})} to={'/'}>Dashboard</NavLink>:<NavLink style={({isActive})=>({color:isActive?'black':'white',background:isActive?'white':'#3b82f6'})} to={'/'}>Register</NavLink>
+				log?<NavLink style={({isActive})=>({color:isActive?'#3b82f6':'white', background:isActive?'white':'#3b82f6'})} to={'/'}>Dashboard</NavLink>:<NavLink style={({isActive})=>({color:isActive?'#3b82f6':'white',background:isActive?'white':'#3b82f6'})} to={'/'}>Register</NavLink>
 			}
 			
 			{

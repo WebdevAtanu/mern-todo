@@ -3,6 +3,7 @@ import context from '../context';
 import {Navigate} from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import Generative from './Generative'
 
 function Dashboard() {
 	const {user,log}=useContext(context);
@@ -33,6 +34,8 @@ function Dashboard() {
 		toast.success(result.data.message);
 		setRefresh(refresh+1);
 		setLoad(false);
+		setTitle("");
+		setDescription("");
 		}catch(error){
 			toast.error('Operation failed');
 			setLoad(false);
@@ -69,6 +72,7 @@ function Dashboard() {
 
 	if(!log) return <Navigate to='/'/>
 	return (
+		<>
 		<div className='dashboard'>
 		<div className="inputs">
 		<div className="user">
@@ -84,29 +88,35 @@ function Dashboard() {
 		</div>
 		</div>
 		<div className='showtasks'>
-			{
-				tasks?.map((item,i)=>{
-					return(
-					<div className='mytask' key={i}>
-					<div className="card">
-					<div className="cardhead">
-					<h5>serial no: {i+1}</h5>
-					</div>
-					<h3>{item.title}</h3>
-					<p>{item.description}</p>
-					<div className="cardbtns">
-					{
-						item.isComplete?<button id='checked' onClick={()=>editHandler(item._id)}>Uncheck</button>:<button id='unchecked' onClick={()=>editHandler(item._id)}>Check</button>
-					}
-					<button id='delete' onClick={()=>deleteHandler(item._id)}>Delete</button>
-					</div>
-					</div>
-					</div>
-					)
-				})
-			}
+		<h2>My bucket list</h2>
+		<table>
+		<thead>
+			<tr>
+				<th>Serial</th>
+				<th>Title</th>
+				<th>Description</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+			<tbody>
+				{
+					tasks?.map((item,i)=>{
+						return(
+							<tr key={i}>
+								<td><h4>{i+1}</h4></td>
+								<td>{item.title}</td>
+								<td>{item.description}</td>
+								<td><button id='delete' onClick={()=>deleteHandler(item._id)} disabled={loader} aria-busy={loader} aria-live="polite"><i className="bi bi-trash"></i></button></td>
+							</tr>
+						)
+					})
+				}
+			</tbody>
+		</table>
 		</div>
 		</div>
+		<Generative setRefresh={setRefresh} refresh={refresh}/>
+	</>
 	)
 }
 

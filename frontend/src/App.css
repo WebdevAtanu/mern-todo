@@ -287,11 +287,8 @@ body {
 }
 
 @media screen and (max-width:680px) {
-  .showtasks {
-    grid-template-columns: auto;
-  }
 
-  .addtask {
+  .dashboard .addtask {
     width: calc(100% - 1rem);
   }
 

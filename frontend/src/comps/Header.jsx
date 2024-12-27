@@ -17,15 +17,15 @@ function Header() {
 	return (
 		<div className='header'>
 		<div>
-			LOGO
+			<img src="logo.png" alt="" id='logo'/>
 		</div>
 		<div className='links'>
 			{
-				log?<NavLink style={({isActive})=>({color:isActive?'#3b82f6':'white', background:isActive?'white':'#3b82f6'})} to={'/'}>Dashboard</NavLink>:<NavLink style={({isActive})=>({color:isActive?'#3b82f6':'white',background:isActive?'white':'#3b82f6'})} to={'/'}>Register</NavLink>
+				log?<NavLink style={({isActive})=>({color:isActive?'black':'white', background:isActive?'white':'black'})} to={'/'}>Dashboard</NavLink>:<NavLink style={({isActive})=>({color:isActive?'black':'white',background:isActive?'white':'black'})} to={'/'}>Register</NavLink>
 			}
 			
 			{
-				log?<button id='logout' onClick={logoutHandler}>Logout</button>:<NavLink style={({isActive})=>({color:isActive?'#3b82f6':'white',background:isActive?'white':'#3b82f6'})} to={'/login'}>Login</NavLink>
+				log?<button id='logout' onClick={logoutHandler}><i className="bi bi-power"></i></button>:<NavLink style={({isActive})=>({color:isActive?'black':'white',background:isActive?'white':'black'})} to={'/login'}>Login</NavLink>
 			}
 			
 		</div>

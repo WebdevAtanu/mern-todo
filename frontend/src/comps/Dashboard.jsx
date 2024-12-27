@@ -74,7 +74,6 @@ function Dashboard() {
 	return (
 		<>
 		<div className='dashboard'>
-		<div className="inputs">
 		<div className='addtask'>
 		<div className="user">
 			<h3>user: {user.name}</h3>
@@ -86,9 +85,8 @@ function Dashboard() {
 				<button type='submit' disabled={load} aria-busy={load} aria-live="polite">{load ? "wait..." : "Add task"}</button>
 			</form>
 		</div>
-		</div>
 		<div className='showtasks'>
-		<h2>My bucket list</h2>
+		<h2>My Productivity List</h2>
 		<table>
 		<thead>
 			<tr>

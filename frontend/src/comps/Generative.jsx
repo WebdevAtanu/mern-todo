@@ -43,9 +43,7 @@ export default function Generative(props) {
  
   return (
     <div className='generative'>
-      <h2>Generative todos</h2>
-      <h4>You can ask the AI for any help, just click on the chat box.</h4>
-      {
+     {
       todos.length!=0?
       <>
       <p>Here is your temporary todo list. from here you can add these todos to your bucket list.</p>
@@ -64,7 +62,7 @@ export default function Generative(props) {
           <tr>
             <td>Task from AI</td>
             <td>{item}</td>
-            <td><button onClick={()=>handleSubmit(item)} disabled={load} aria-busy={load} aria-live="polite">Add</button></td>
+            <td><button onClick={()=>handleSubmit(item)} disabled={load} aria-busy={load} aria-live="polite"><i className="bi bi-plus-circle-fill"></i> Add</button></td>
           </tr>
           )
           })
@@ -74,7 +72,10 @@ export default function Generative(props) {
       <button id='clear' onClick={()=>setTodos([])}>Clear all</button>
       </>
       :
-      null
+      <div>
+        <h2>Generative todos</h2>
+        <h4>You can ask the AI for any help, just click on the chat box.</h4>
+      </div>
       }
     </div>
   );

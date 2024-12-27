@@ -74,17 +74,6 @@ function Dashboard() {
 	return (
 		<>
 		<div className='dashboard'>
-		<div className='addtask'>
-		<div className="user">
-			<h3>user: {user.name}</h3>
-			<h3>email: {user.email}</h3>
-		</div>
-			<form action="" onSubmit={handleSubmit}>
-				<input type="text" name='name' placeholder='Task name' value={title} onChange={e=>setTitle(e.target.value)} required/>
-				<textarea name="description"  placeholder='Task description' value={description} onChange={e=>setDescription(e.target.value)} required/>
-				<button type='submit' disabled={load} aria-busy={load} aria-live="polite">{load ? "wait..." : "Add task"}</button>
-			</form>
-		</div>
 		<div className='showtasks'>
 		<h2>My Productivity List</h2>
 		<table>
@@ -111,6 +100,17 @@ function Dashboard() {
 				}
 			</tbody>
 		</table>
+		</div>
+		<div className='addtask'>
+		<div className="user">
+			<h3>user: {user.name}</h3>
+			<h3>email: {user.email}</h3>
+		</div>
+			<form action="" onSubmit={handleSubmit}>
+				<input type="text" name='name' placeholder='Task name' value={title} onChange={e=>setTitle(e.target.value)} required/>
+				<textarea name="description"  placeholder='Task description' value={description} onChange={e=>setDescription(e.target.value)} required/>
+				<button type='submit' disabled={load} aria-busy={load} aria-live="polite">{load ? "wait..." : "Add task"}</button>
+			</form>
 		</div>
 		</div>
 		<Generative setRefresh={setRefresh} refresh={refresh}/>

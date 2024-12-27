@@ -43,24 +43,30 @@ function Dashboard() {
 	}
 
 	const editHandler=async(id)=>{
-		console.log(id)
+		toast.loading('wait...')
+		setLoader(true);
 		try{
-		const result=await axios.put(`${import.meta.env.VITE_BACKEND}/task/${id}`,{
+		const result=await axios.put(`${import.meta.env.VITE_BACKEND}/task/${id}`,{},{
 			withCredentials:true
 		});
+		toast.dismiss();
 		toast.success(result.data.message);
+		setLoader(false);
 		setRefresh(refresh+1);
 		}catch(error){
 			toast.error('Operation failed');
+			setLoader(false);
 		}
 	}
 
 	const deleteHandler=async(id)=>{
+		toast.loading('wait...')
 		setLoader(true);
 		try{
 		const result=await axios.delete(`${import.meta.env.VITE_BACKEND}/task/${id}`,{
 			withCredentials:true
 		});
+		toast.dismiss();
 		toast.success(result.data.message);
 		setLoader(false);
 		setRefresh(refresh+1);
@@ -79,7 +85,7 @@ function Dashboard() {
 		<table>
 		<thead>
 			<tr>
-				<th>Serial</th>
+				<th>Check</th>
 				<th>Title</th>
 				<th>Description</th>
 				<th>Delete</th>
@@ -90,7 +96,7 @@ function Dashboard() {
 					tasks?.map((item,i)=>{
 						return(
 							<tr key={i}>
-								<td><h4>{i+1}</h4></td>
+								<td><button id='edit' onClick={()=>editHandler(item._id)} disabled={loader} aria-busy={loader} aria-live="polite">{item.isComplete?<i className="bi bi-patch-check-fill"></i>:<i className="bi bi-patch-check"></i>}</button></td>
 								<td>{item.title}</td>
 								<td>{item.description}</td>
 								<td><button id='delete' onClick={()=>deleteHandler(item._id)} disabled={loader} aria-busy={loader} aria-live="polite"><i className="bi bi-trash"></i></button></td>

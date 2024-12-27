@@ -186,7 +186,8 @@ body {
             text-align: center;
           }
 
-          & button {
+          & #delete,
+          #edit {
             all: unset;
             width: calc(100% - 0.6rem);
             padding: 0.2rem;
@@ -195,11 +196,14 @@ body {
             font-size: 1rem;
             cursor: pointer;
             text-align: center;
+          }
 
-            &:hover {
-              color: red;
-            }
+          & #delete:hover {
+            color: red;
+          }
 
+          & .bi-patch-check-fill {
+            color: blue;
           }
 
         }
@@ -287,7 +291,6 @@ body {
 }
 
 @media screen and (max-width:680px) {
-
   .dashboard .addtask {
     width: calc(100% - 1rem);
   }

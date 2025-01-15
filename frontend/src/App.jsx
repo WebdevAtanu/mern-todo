@@ -1,10 +1,10 @@
 import { useState,useEffect } from 'react'
 import './App.css';
 import {BrowserRouter,Route,Routes} from 'react-router-dom';
-import Header from './comps/Header';
-import Register from './comps/Register';
-import Login from './comps/Login';
-import Dashboard from './comps/Dashboard';
+import Header from './component/Header';
+import Register from './component/Register';
+import Login from './component/Login';
+import Dashboard from './component/Dashboard';
 import context from './context';
 import axios from 'axios'
 

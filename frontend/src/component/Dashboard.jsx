@@ -4,6 +4,8 @@ import {Navigate} from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import Generative from './Generative'
+import Cards from './Cards'
+import { Flex, Button, Text, TextField, TextArea } from "@radix-ui/themes";
 
 function Dashboard() {
 	const {user,log}=useContext(context);
@@ -13,110 +15,79 @@ function Dashboard() {
 	const [refresh,setRefresh]=useState(0);
 	const [load,setLoad]=useState(false);
 	const [loader,setLoader]=useState(false);
-	useEffect(()=>{
-		axios.get(`${import.meta.env.VITE_BACKEND}/task/mytask`,{
-			withCredentials:true
-		})
-		.then(res=>setTasks(res.data.tasks))
-		.catch(error=>console.log(error))
-	},[refresh])
 
-	const handleSubmit=async (e)=>{
-		e.preventDefault();
-		setLoad(true);
-		try{
-		const result=await axios.post(`${import.meta.env.VITE_BACKEND}/task/add`,{title,description},{
-			header:{
-				'content-type':'application/json'
-			},
-			withCredentials:true
-		});
-		toast.success(result.data.message);
-		setRefresh(refresh+1);
-		setLoad(false);
-		setTitle("");
-		setDescription("");
-		}catch(error){
-			toast.error('Operation failed');
-			setLoad(false);
-		}
-	}
+    useEffect(() => {
+        axios.get(`${import.meta.env.VITE_BACKEND}/task/mytask`, {
+                withCredentials: true
+            })
+            .then(res => setTasks(res.data.tasks))
+            .catch(error => console.log(error))
+    }, [refresh])
 
-	const editHandler=async(id)=>{
-		toast.loading('wait...')
-		setLoader(true);
-		try{
-		const result=await axios.put(`${import.meta.env.VITE_BACKEND}/task/${id}`,{},{
-			withCredentials:true
-		});
-		toast.dismiss();
-		toast.success(result.data.message);
-		setLoader(false);
-		setRefresh(refresh+1);
-		}catch(error){
-			toast.error('Operation failed');
-			setLoader(false);
-		}
-	}
-
-	const deleteHandler=async(id)=>{
-		toast.loading('wait...')
-		setLoader(true);
-		try{
-		const result=await axios.delete(`${import.meta.env.VITE_BACKEND}/task/${id}`,{
-			withCredentials:true
-		});
-		toast.dismiss();
-		toast.success(result.data.message);
-		setLoader(false);
-		setRefresh(refresh+1);
-		}catch(error){
-			toast.error('Operation failed');
-			setLoader(false);
-		}
-	}
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+        setLoad(true);
+        try {
+            const result = await axios.post(`${import.meta.env.VITE_BACKEND}/task/add`, {
+                title,
+                description
+            }, {
+                header: {
+                    'content-type': 'application/json'
+                },
+                withCredentials: true
+            });
+            toast.success(result.data.message);
+            setRefresh(refresh + 1);
+            setLoad(false);
+            setTitle("");
+            setDescription("");
+        } catch (error) {
+            toast.error('Operation failed');
+            setLoad(false);
+        }
+    }
 
 	if(!log) return <Navigate to='/'/>
+
 	return (
 		<>
 		<div className='dashboard'>
+		<div id="sidebar">
+			<Flex direction="column" gap="0" className='user' align='center'>
+			<p>{user.name}</p>
+			<p>{user.email}</p>
+			</Flex>
+		
+		<div className='addtask'>
+			<form action="" onSubmit={handleSubmit}>
+				<Flex direction="column" gap="3">
+				<label>
+					<Text as="div" size="2" mb="1" weight="bold">Title</Text>
+					<TextField.Root placeholder="Task title" value={title} onChange={e=>setTitle(e.target.value)} required />
+				</label>
+				<label>
+					<Text as="div" size="2" mb="1" weight="bold">Description</Text>
+					<TextArea value={description} onChange={e=>setDescription(e.target.value)} placeholder="Task description…" />
+				</label>
+				<Flex gap="3" mt="4" justify="center">
+					<Button type='submit' disabled={load} aria-busy={load} aria-live="polite">{load ? "wait..." : "Add"}</Button>
+				</Flex>
+				</Flex>
+			</form>
+		</div>
+		</div>
+
+		<div id='taskbar'>
 		<div className='showtasks'>
-		<h2>My Productivity List</h2>
-		<table>
-		<thead>
-			<tr>
-				<th>Check</th>
-				<th>Title</th>
-				<th>Description</th>
-				<th>Delete</th>
-			</tr>
-		</thead>
-			<tbody>
 				{
 					tasks?.map((item,i)=>{
 						return(
-							<tr key={i}>
-								<td><button id='edit' onClick={()=>editHandler(item._id)} disabled={loader} aria-busy={loader} aria-live="polite">{item.isComplete?<i className="bi bi-patch-check-fill"></i>:<i className="bi bi-patch-check"></i>}</button></td>
-								<td>{item.title}</td>
-								<td>{item.description}</td>
-								<td><button id='delete' onClick={()=>deleteHandler(item._id)} disabled={loader} aria-busy={loader} aria-live="polite"><i className="bi bi-trash"></i></button></td>
-							</tr>
+							<Cards item={item} setRefresh={setRefresh} refresh={refresh} key={i}/>
 						)
 					})
 				}
-			</tbody>
-		</table>
 		</div>
-		<div className='addtask'>
-		<div className="user">
-			<h3>user: {user.name}</h3>
-			<h3>email: {user.email}</h3>
-		</div>
-			<form action="" onSubmit={handleSubmit}>
-				<input type="text" name='name' placeholder='Task name' value={title} onChange={e=>setTitle(e.target.value)} required/>
-				<textarea name="description"  placeholder='Task description' value={description} onChange={e=>setDescription(e.target.value)} required/>
-				<button type='submit' disabled={load} aria-busy={load} aria-live="polite">{load ? "wait..." : "Add task"}</button>
-			</form>
 		</div>
 		</div>
 		{/* <Generative setRefresh={setRefresh} refresh={refresh}/> */}

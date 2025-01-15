@@ -1,213 +1,90 @@
 @import url('https://fonts.googleapis.com/css2?family=Lusitana:wght@400;700&display=swap');
 
-* {
+*,
+body {
   margin: 0;
   padding: 0;
-}
-
-body {
   font-family: "Lusitana", system-ui;
 }
 
+/*=================================================header=================================================*/
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: black;
-  padding: 0 2rem;
+  padding: 0.5rem 2rem;
+  box-shadow: 0px 2px 3px #80808026;
 
   & #logo {
-    width: 20%;
-  }
-
-  & .links {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-
-    & a {
-      text-decoration: none;
-      padding: 0.3rem 1rem;
-      transition: all 0.3s;
-    }
-
+    width: 10%;
   }
 
 }
 
+.links {
+  all: unset;
+}
+
+/*======================================register and login======================================*/
 .register,
 .login {
   padding: 1.5rem;
   max-width: 30vw;
   margin: 1rem auto;
-  border: 1px solid black;
+  border: 1px solid grey;
   border-radius: 1rem;
 
-  & form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-
-    & input {
-      padding: 0.5rem 1rem;
-      width: calc(100% - 2rem);
-      font-family: "Lusitana", system-ui;
-      border-radius: 0.5rem;
-      border: 0;
-      border-bottom: 1px solid black;
-      outline: 0;
-    }
-
-    & button {
-      all: unset;
-      border: 0;
-      background: black;
-      color: white;
-      padding: 0.3rem 1.5rem;
-      cursor: pointer;
-      transition: all 0.3s;
-      border-radius: 5px;
-
-      &:hover {
-        transform: scale(1.05);
-      }
-
-    }
-
+  & input,
+  button {
+    font-family: "Lusitana", system-ui;
   }
 
 }
 
-#logout {
-  all: unset;
-  transition: all 0.3s;
-  padding: 0.5rem;
-  color: white;
-  font-size: 1.2rem;
-
-  &:hover {
-    color: red;
-    cursor: pointer;
-  }
-
-}
-
+/*======================================dashboard======================================*/
 .dashboard {
   padding: 1rem;
-  margin: 0 auto;
+  background: #8080802e;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
 
-  & .addtask {
-    padding: 0.5rem;
-    width: 50%;
-    margin: auto;
-    border: 1px solid gray;
-    border-radius: 1rem;
-    margin-top: 1rem;
+  & #sidebar {
+    height: calc(100vh - 5rem);
+    background: white;
 
     & .user {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.5rem;
-      padding: 0 0.5rem;
-      color: dimgray;
-    }
-
-  }
-
-  & form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 0.5rem;
-
-    & input {
-      padding: 0.5rem 0;
-      font-family: "Lusitana", system-ui;
-      border: 1px solid lightgray;
-      border: 0;
-      border-bottom: 1px solid black;
-      outline: 0;
-    }
-
-    & textarea {
-      padding: 0.5rem 0;
-      resize: none;
-      height: 3rem;
-      font-family: "Lusitana", system-ui;
-      border: 0;
-      border-bottom: 1px solid black;
-      outline: 0;
-    }
-
-    & button {
-      margin: auto;
-      padding: 0.5rem 1.5rem;
-      border: 0;
-      background: black;
+      background: #2f4db1;
       color: white;
-      cursor: pointer;
-      font-size: 0.8rem;
-      margin-top: 0.5rem;
-      transition: all 0.2s;
-      border-radius: 5px;
+      padding: 0.5rem;
+    }
 
-      &:hover {
-        transform: scale(1.05);
+    & .addtask {
+      background: white;
+      padding: 0.5rem;
+      border-radius: 1rem;
+      margin-top: 1rem;
+
+      & button {
+        cursor: pointer;
+        width: 100%;
       }
 
     }
 
   }
 
-  & .showtasks {
-    h2 {
-      text-align: center;
-      margin-bottom: 1rem;
-      text-decoration: underline;
-      text-underline-offset: 0.5rem;
-    }
+  & #taskbar {
+    grid-column: span 3;
 
-    & table {
-      width: 100%;
-      border-collapse: collapse;
+    & .showtasks {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
 
-      & tr {
-        &:hover {
-          background: #b9b5b536;
-        }
-
-        & th,
-        td {
-          border: 1px solid gray;
-          padding: 0.2rem;
-
-          & h4 {
-            text-align: center;
-          }
-
-          & #delete,
-          #edit {
-            all: unset;
-            width: calc(100% - 0.6rem);
-            padding: 0.2rem;
-            cursor: pointer;
-            transition: all 0.1s;
-            font-size: 1rem;
-            cursor: pointer;
-            text-align: center;
-          }
-
-          & #delete:hover {
-            color: red;
-          }
-
-          & .bi-patch-check-fill {
-            color: blue;
-          }
-
-        }
-
+      & button {
+        margin-top: 0.8rem;
+        cursor: pointer;
       }
 
     }
@@ -216,6 +93,7 @@ body {
 
 }
 
+/*======================================generative AI======================================*/
 .generative {
   text-align: center;
   margin-bottom: 1rem;
@@ -291,8 +169,31 @@ body {
 }
 
 @media screen and (max-width:680px) {
+  .header #logo {
+    width: 15%;
+  }
+
+  .dashboard {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
   .dashboard .addtask {
     width: calc(100% - 1rem);
+  }
+
+  .dashboard #sidebar {
+    height: 100%;
+  }
+
+  .dashboard #taskbar {
+    grid-column: span 1;
+  }
+
+  .dashboard #taskbar .showtasks {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
   }
 
   .register,

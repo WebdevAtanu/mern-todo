@@ -11,7 +11,7 @@ import context from './context';
 import axios from 'axios'
 
 function App() {
-  const [log,setLog]=useState(true);
+  const [log,setLog]=useState(false);
   const [user,setUser]=useState({});
   useEffect(()=>{
     axios.get(`${import.meta.env.VITE_BACKEND}/user/details`,{

@@ -10,10 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@copilotkit/react-core": "^1.4.7",
-    "@copilotkit/react-ui": "^1.4.7",
+    "@copilotkit/react-core": "^1.5.11",
+    "@copilotkit/react-textarea": "^1.5.11",
+    "@copilotkit/react-ui": "^1.5.11",
     "@radix-ui/themes": "^3.1.6",
     "axios": "^1.7.7",
+    "moment": "^2.30.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.4.1",

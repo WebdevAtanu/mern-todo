@@ -1,19 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Lusitana:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Handlee&display=swap');
 
-*,
-body {
+*, body {
   margin: 0;
   padding: 0;
-  font-family: "Lusitana", system-ui;
+  font-family: "Handlee", serif;
 }
-
 /*=================================================header=================================================*/
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 2rem;
-  box-shadow: 0px 2px 3px #80808026;
 
   & #logo {
     width: 10%;
@@ -25,49 +22,90 @@ body {
   all: unset;
 }
 
-/*======================================register and login======================================*/
-.register,
-.login {
-  padding: 1.5rem;
-  max-width: 30vw;
-  margin: 1rem auto;
-  border: 1px solid grey;
-  border-radius: 1rem;
+/*======================================user======================================*/
+#user {
+  min-height: calc(100vh - 5rem);
+  padding: 1rem;
+  background: linear-gradient(152deg, rgba(92, 178, 247, 1) 50%, rgba(41, 108, 129, 1) 0%);
 
-  & input,
-  button {
+  & #box {
+    background: white;
+    padding: 1rem;
+    width: 50vw;
+    margin: auto;
+    border-radius: 1rem;
+    filter: drop-shadow(0px 0px 3px grey);
+
+    & .center {
+      text-align: center;
+
+      & p>span {
+        color: blue;
+        cursor: pointer;
+      }
+
+    }
+
+  }
+
+}
+
+/*======================================user, register and login======================================*/
+.register, .login {
+  padding: 1.5rem;
+  width: calc(100% - 3rem);
+  margin: auto;
+  border-radius: 1rem;
+  animation:pop 0.1s linear forwards;
+
+  & input, button {
     font-family: "Lusitana", system-ui;
+  }
+
+}
+
+@keyframes pop {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 
 }
 
 /*======================================dashboard======================================*/
 .dashboard {
-  padding: 1rem;
-  background: #8080802e;
+  padding: 0.5rem;
+  background: linear-gradient(152deg, rgba(92, 178, 247, 1) 50%, rgba(41, 108, 129, 1) 0%);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  gap: 0.5rem;
+  height: calc(100vh - 4rem);
 
   & #sidebar {
-    height: calc(100vh - 5rem);
     background: white;
+    border-radius: 0.5rem;
+    height: 100%;
 
     & .user {
-      background: #2f4db1;
+      background: #134897;
       color: white;
       padding: 0.5rem;
+      border-radius: 0.5rem 0.5rem 0 0;
     }
 
     & .addtask {
       background: white;
       padding: 0.5rem;
-      border-radius: 1rem;
-      margin-top: 1rem;
+      margin-top: 0.5rem;
+      border-radius: 0.5rem;
 
       & button {
         cursor: pointer;
         width: 100%;
+        font-family: "Handlee", serif;
       }
 
     }
@@ -76,65 +114,21 @@ body {
 
   & #taskbar {
     grid-column: span 3;
+    padding: 0 0.5rem;
+    height: 100%;
+    overflow: auto;
 
     & .showtasks {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
 
-      & button {
-        margin-top: 0.8rem;
-        cursor: pointer;
-      }
+      & .cards {
+        background: white;
 
-    }
-
-  }
-
-}
-
-/*======================================generative AI======================================*/
-.generative {
-  text-align: center;
-  margin-bottom: 1rem;
-
-  & h4 {
-    margin-bottom: 1rem;
-  }
-
-  & p {
-    margin-bottom: 1rem;
-    text-decoration: underline;
-    text-underline-offset: 0.3rem;
-  }
-
-  & table {
-    width: 70%;
-    margin: auto;
-    border-collapse: collapse;
-
-    & tr {
-      & th,
-      td {
-        border: 1px solid gray;
-        padding: 0.2rem;
-
-        & h4 {
-          text-align: center;
-        }
-
-        button {
-          all: unset;
-          width: calc(100% - 1rem);
+        & button {
           cursor: pointer;
-          transition: all 0.3s;
-          margin-left: 0.5rem;
-          text-align: center;
-
-          &:hover {
-            color: skyblue;
-          }
-
+          width: 49%;
         }
 
       }
@@ -143,69 +137,34 @@ body {
 
   }
 
-  #clear {
-    margin: auto;
-    padding: 0.5rem 1.5rem;
-    border: 0;
-    background: black;
-    color: white;
-    cursor: pointer;
-    font-size: 0.8rem;
-    margin-top: 1rem;
-    transition: all 0.2s;
-    border-radius: 5px;
-
-    &:hover {
-      transform: scale(1.05);
-    }
-
-  }
-
 }
 
-.copilotKitButton,
-.copilotKitHeader {
-  background: black !important;
-}
-
+/*======================================responsive======================================*/
 @media screen and (max-width:680px) {
   .header #logo {
     width: 15%;
   }
 
+  #user #box {
+    width: 90vw;
+  }
+
   .dashboard {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  .dashboard .addtask {
-    width: calc(100% - 1rem);
-  }
-
-  .dashboard #sidebar {
     height: 100%;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(1, 1fr);
   }
 
   .dashboard #taskbar {
     grid-column: span 1;
+    padding: 0;
   }
 
   .dashboard #taskbar .showtasks {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 1rem;
-  }
-
-  .register,
-  .login {
-    max-width: calc(100vw - 5rem);
-  }
-
-  .generative {
-    & table {
-      width: 100%;
-    }
-
   }
 
 }

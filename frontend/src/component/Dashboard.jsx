@@ -5,7 +5,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import Generative from './Generative'
 import Cards from './Cards'
-import { Flex, Button, Text, TextField, TextArea } from "@radix-ui/themes";
+import { Flex, Button, Text, TextField, TextArea, Avatar, Spinner } from "@radix-ui/themes";
 
 function Dashboard() {
 	const {user,log}=useContext(context);
@@ -54,31 +54,38 @@ function Dashboard() {
 		<>
 		<div className='dashboard'>
 		<div id="sidebar">
-			<Flex direction="column" gap="0" className='user' align='center'>
-			<p>{user.name}</p>
-			<p>{user.email}</p>
+			<Flex className='user' justify='between' align='center'>
+				<Avatar src="avatar.jpg"mfallback="A"/>
+				<p>{user.name}</p>
 			</Flex>
 		
-		<div className='addtask'>
-			<form action="" onSubmit={handleSubmit}>
-				<Flex direction="column" gap="3">
-				<label>
-					<Text as="div" size="2" mb="1" weight="bold">Title</Text>
-					<TextField.Root placeholder="Task title" value={title} onChange={e=>setTitle(e.target.value)} required />
-				</label>
-				<label>
-					<Text as="div" size="2" mb="1" weight="bold">Description</Text>
-					<TextArea value={description} onChange={e=>setDescription(e.target.value)} placeholder="Task description…" />
-				</label>
-				<Flex gap="3" mt="4" justify="center">
-					<Button type='submit' disabled={load} aria-busy={load} aria-live="polite">{load ? "wait..." : "Add"}</Button>
-				</Flex>
-				</Flex>
-			</form>
-		</div>
+			<div className='addtask'>
+				<form action="" onSubmit={handleSubmit}>
+					<Flex direction="column" gap="3">
+					<label>
+						<Text as="div" size="2" mb="1" weight="bold">Title</Text>
+						<TextField.Root placeholder="Task title" value={title} onChange={e=>setTitle(e.target.value)} required />
+					</label>
+					<label>
+						<Text as="div" size="2" mb="1" weight="bold">Description</Text>
+						<TextArea value={description} onChange={e=>setDescription(e.target.value)} placeholder="Task description…" />
+					</label>
+					<Flex gap="3" mt="4" justify="center">
+						<Button type='submit' disabled={load} aria-busy={load} aria-live="polite">{load ? "wait..." : "Add"}</Button>
+					</Flex>
+					</Flex>
+				</form>
+			</div>
 		</div>
 
 		<div id='taskbar'>
+		{
+		tasks.length==0?
+		<Flex justify='center' align='center' direction='column' gap='3'>
+			<Spinner size="3" />
+			<h3>data is loading...</h3>
+		</Flex>
+			:
 		<div className='showtasks'>
 				{
 					tasks?.map((item,i)=>{
@@ -88,9 +95,10 @@ function Dashboard() {
 					})
 				}
 		</div>
+		}
 		</div>
 		</div>
-		{/* <Generative setRefresh={setRefresh} refresh={refresh}/> */}
+		<Generative setRefresh={setRefresh} refresh={refresh}/>
 	</>
 	)
 }

@@ -36,7 +36,7 @@ function Register() {
         }
     }
 
-	if(log) return <Navigate to='/'/>
+	if(log) return <Navigate to='/dashboard'/>
 	
 	return (
 		<div className='register'>

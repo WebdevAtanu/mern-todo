@@ -35,7 +35,7 @@ function Login() {
 
     }
 
-	if(log) return <Navigate to='/'/>
+	if(log) return <Navigate to='/dashboard'/>
 		
 	return (
 		<div className='login'>

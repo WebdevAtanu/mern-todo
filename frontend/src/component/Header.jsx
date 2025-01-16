@@ -5,7 +5,6 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { DropdownMenu, Button } from "@radix-ui/themes";
 
-
 function Header() {
 	const {log,setLog}=useContext(context);
 
@@ -19,23 +18,22 @@ function Header() {
         toast.error('There is a problem in render hosting');
         setLog(false);
     }
+
 	return (
 		<div className='header'>
 		<img src="logo.png" alt="" id='logo'/>
 		<DropdownMenu.Root>
 			<DropdownMenu.Trigger>
-				<Button variant="soft">
-					Menu
-					<DropdownMenu.TriggerIcon />
-				</Button>
+				<Button variant="soft">Menu <DropdownMenu.TriggerIcon /></Button>
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Content>
-				<NavLink to='/login' className='links'><DropdownMenu.Item shortcut="⌘ u">login</DropdownMenu.Item></NavLink>
-				<NavLink to='/' className='links'><DropdownMenu.Item shortcut="⌘ n">new user</DropdownMenu.Item></NavLink>
+			{
+				log?<NavLink to='/' className='links'><DropdownMenu.Item shortcut="⌘ u">user</DropdownMenu.Item></NavLink>:<NavLink to='/dashboard' className='links'><DropdownMenu.Item shortcut="⌘ d">dashboard</DropdownMenu.Item></NavLink>
+			}
 				<DropdownMenu.Separator />
-				<NavLink to='/' className='links'><DropdownMenu.Item shortcut="⌘ d">dashboard</DropdownMenu.Item></NavLink>
-				<DropdownMenu.Separator />
-				<DropdownMenu.Item color="red" onClick={logoutHandler}>logout</DropdownMenu.Item>
+			{
+				log?<DropdownMenu.Item color="red" onClick={logoutHandler}>logout</DropdownMenu.Item>:null
+			}
 			</DropdownMenu.Content>
 		</DropdownMenu.Root>
 		</div>

@@ -6,8 +6,10 @@ import toast from "react-hot-toast";
 import { Flex, Button, Text, TextField } from "@radix-ui/themes";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [userDetails, setUserDetails] = useState({
+    email: "",
+    password: "",
+  });
   const [load, setLoad] = useState(false);
   const { log, setLog } = useContext(context);
 
@@ -18,10 +20,7 @@ function Login() {
     try {
       const result = await axios.post(
         `${import.meta.env.VITE_BACKEND}/user/login`,
-        {
-          email,
-          password,
-        },
+        userDetails,
         {
           headers: {
             "Content-Type": "application/json",
@@ -58,9 +57,11 @@ function Login() {
               Email
             </Text>
             <TextField.Root
-              placeholder="freja@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              placeholder="mr.wangdu@example.com"
+              value={userDetails.email}
+              onChange={(e) =>
+                setUserDetails({ ...userDetails, email: e.target.value })
+              }
               required
             />
           </label>
@@ -70,8 +71,10 @@ function Login() {
             </Text>
             <TextField.Root
               placeholder="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={userDetails.password}
+              onChange={(e) =>
+                setUserDetails({ ...userDetails, password: e.target.value })
+              }
               required
             />
           </label>

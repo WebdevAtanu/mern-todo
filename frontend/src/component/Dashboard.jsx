@@ -18,8 +18,10 @@ import axiosInstance from "../service/axiosInterceptor";
 function Dashboard() {
   const { user, log } = useContext(context);
   const [tasks, setTasks] = useState([]);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [taskdetails, setTaskdetails] = useState({
+    title: "",
+    description: "",
+  });
   const [refresh, setRefresh] = useState(0);
   const [load, setLoad] = useState(false);
   const [loadingTimeout, setLoadingTimeout] = useState(false);
@@ -49,24 +51,16 @@ function Dashboard() {
     e.preventDefault();
     setLoad(true);
     try {
-      const result = await axiosInstance.post(
-        `/task/add`,
-        {
-          title,
-          description,
+      const result = await axiosInstance.post(`/task/add`, taskdetails, {
+        header: {
+          "content-type": "application/json",
         },
-        {
-          header: {
-            "content-type": "application/json",
-          },
-          withCredentials: true,
-        }
-      );
+        withCredentials: true,
+      });
       toast.success(result.data.message);
       setRefresh(refresh + 1);
       setLoad(false);
-      setTitle("");
-      setDescription("");
+      setTaskdetails({ title: "", description: "" });
     } catch {
       toast.error("Operation failed");
       setLoad(false);
@@ -92,9 +86,11 @@ function Dashboard() {
                     Title
                   </Text>
                   <TextField.Root
-                    placeholder="Task title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    placeholder="title"
+                    value={taskdetails.title}
+                    onChange={(e) =>
+                      setTaskdetails({ ...taskdetails, title: e.target.value })
+                    }
                     required
                   />
                 </label>
@@ -103,9 +99,14 @@ function Dashboard() {
                     Description
                   </Text>
                   <TextArea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    placeholder="Task description…"
+                    value={taskdetails.description}
+                    onChange={(e) =>
+                      setTaskdetails({
+                        ...taskdetails,
+                        description: e.target.value,
+                      })
+                    }
+                    placeholder="description…"
                   />
                 </label>
                 <Flex gap="3" mt="4" justify="center">
@@ -127,11 +128,11 @@ function Dashboard() {
           {tasks.length === 0 && !loadingTimeout ? (
             <Flex justify="center" align="center" direction="column" gap="3">
               <Spinner size="3" />
-              <h3>data is loading...</h3>
+              <h3>Previous tasks is loading...</h3>
             </Flex>
           ) : tasks.length === 0 && loadingTimeout ? (
             <Flex justify="center" align="center" direction="column" gap="3">
-              <h3>No data found!</h3>
+              <h3>No task found!</h3>
             </Flex>
           ) : (
             <div className="showtasks">

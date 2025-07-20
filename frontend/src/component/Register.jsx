@@ -6,9 +6,12 @@ import toast from "react-hot-toast";
 import { Flex, Button, Text, TextField } from "@radix-ui/themes";
 
 function Register() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [userDetails, setUserDetails] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
   const [load, setLoad] = useState(false);
   const { log, setLog } = useContext(context);
 
@@ -18,11 +21,7 @@ function Register() {
     try {
       const result = await axios.post(
         `${import.meta.env.VITE_BACKEND}/user/new`,
-        {
-          name,
-          email,
-          password,
-        },
+        userDetails,
         {
           header: {
             "content-type": "application/json",
@@ -44,16 +43,18 @@ function Register() {
 
   return (
     <div className="register">
-      <form action="" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <Flex direction="column" gap="3">
           <label>
             <Text as="div" size="2" mb="1" weight="bold">
               Name
             </Text>
             <TextField.Root
-              placeholder="Freja Johnsen"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              placeholder="phunsukh wangdu"
+              value={userDetails.name}
+              onChange={(e) =>
+                setUserDetails({ ...userDetails, name: e.target.value })
+              }
               required
             />
           </label>
@@ -62,9 +63,11 @@ function Register() {
               Email
             </Text>
             <TextField.Root
-              placeholder="freja@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              placeholder="mr.wangdu@example.com"
+              value={userDetails.email}
+              onChange={(e) =>
+                setUserDetails({ ...userDetails, email: e.target.value })
+              }
               required
             />
           </label>
@@ -74,8 +77,10 @@ function Register() {
             </Text>
             <TextField.Root
               placeholder="create password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={userDetails.password}
+              onChange={(e) =>
+                setUserDetails({ ...userDetails, password: e.target.value })
+              }
               required
             />
           </label>

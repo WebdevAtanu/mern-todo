@@ -36,7 +36,7 @@ function Cards({ item, refresh, setRefresh }) {
     }
   };
   return (
-    <Card className="cards">
+    <Card className={`${item.isComplete ? "checked" : null} cards`}>
       <Flex direction="column" gap="3" justify="between" height="100%">
         <Box>
           <Text as="div" size="4" weight="bold">
@@ -59,11 +59,11 @@ function Cards({ item, refresh, setRefresh }) {
             aria-live="polite"
           >
             {item.isComplete ? (
-              <p>
+              <p className="check">
                 <i className="bi bi-patch-check-fill"></i> checked
               </p>
             ) : (
-              <p>
+              <p className="check">
                 <i className="bi bi-patch-check"></i> check
               </p>
             )}

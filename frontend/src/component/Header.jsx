@@ -10,8 +10,7 @@ function Header() {
 
   const logoutHandler = async () => {
     const { data } = await axiosInstance.get(`/user/logout`);
-    console.log(data.message);
-    toast.error("There is a problem in render hosting");
+    toast.success(data.message);
     setLog(false);
   };
 

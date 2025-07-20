@@ -1,3 +1,3 @@
-import {createContext} from 'react';
-const context=createContext(null);
+import { createContext } from "react";
+const context = createContext(null);
 export default context;

@@ -1,11 +1,11 @@
-import {useState,useEffect} from 'react'
-import { useCopilotAction } from "@copilotkit/react-core"; 
-import axios from 'axios';
-import toast from 'react-hot-toast';
- 
+import { useState, useEffect } from "react";
+import { useCopilotAction } from "@copilotkit/react-core";
+import toast from "react-hot-toast";
+import axiosInstance from "../service/axiosInterceptor";
+
 export default function Generative(props) {
   const [todos, setTodos] = useState([]);
- 
+
   useCopilotAction({
     name: "addTodoItem",
     description: "Add a new todo item to the list",
@@ -22,27 +22,28 @@ export default function Generative(props) {
     },
   });
 
-  const handleSubmit=async (todo)=>{
-    try{
-    const result=await axios.post(`${import.meta.env.VITE_BACKEND}/task/add`,{title:'Task from AI',description:todo},{
-      header:{
-        'content-type':'application/json'
-      },
-      withCredentials:true
-    });
-    toast.success(result.data.message);
-    props.setRefresh(props.refresh+1);
-    }catch(error){
-      toast.error('Operation failed');
+  const handleSubmit = async (todo) => {
+    try {
+      const result = await axiosInstance.post(
+        `/task/add`,
+        { title: "Task from CopilotKit", description: todo },
+        {
+          header: {
+            "content-type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      toast.success(result.data.message);
+      props.setRefresh(props.refresh + 1);
+    } catch {
+      toast.error("Operation failed");
     }
-  }
+  };
 
-  useEffect(()=>{
-    todos.forEach(item=>handleSubmit(item))
-  },[todos])
- 
-  return (
-    <>
-    </>
-  );
+  useEffect(() => {
+    todos.forEach((item) => handleSubmit(item));
+  }, [todos]);
+
+  return <></>;
 }

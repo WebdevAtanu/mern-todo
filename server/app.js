@@ -2,7 +2,7 @@ import express from 'express';
 import user_router from './routes/user.route.js'
 import task_router from './routes/task.route.js'
 import cookieParser from 'cookie-parser';
-import {config} from 'dotenv';
+import { config } from 'dotenv';
 import cors from 'cors';
 
 const app = express();

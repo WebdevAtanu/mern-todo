@@ -1,6 +1,6 @@
 import express from 'express';
-import {authentication} from '../middleware/auth.js';
-import {addTask,getTask,updateTask,deleteTask} from '../controller/task.controller.js';
+import { authentication } from '../middleware/auth.js';
+import { addTask, getTask, updateTask, deleteTask } from '../controller/task.controller.js';
 
 const task_router = express.Router();
 task_router.post('/task/add', authentication, addTask);

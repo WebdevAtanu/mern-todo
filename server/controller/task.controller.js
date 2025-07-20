@@ -1,6 +1,6 @@
-import {task} from '../model/task.model.js';
+import { task } from '../model/task.model.js';
 
-export const addTask = async(req, res) => {
+export const addTask = async (req, res) => {
     const {
         title,
         description
@@ -15,7 +15,7 @@ export const addTask = async(req, res) => {
     })
 };
 
-export const getTask = async(req, res) => {
+export const getTask = async (req, res) => {
     const userid = req.user._id;
     const tasks = await task.find({
         user: userid
@@ -26,7 +26,7 @@ export const getTask = async(req, res) => {
     })
 }
 
-export const updateTask = async(req, res) => {
+export const updateTask = async (req, res) => {
     const tasks = await task.findById(req.params.id);
     tasks.isComplete = !tasks.isComplete;
     await tasks.save();
@@ -36,7 +36,7 @@ export const updateTask = async(req, res) => {
     })
 }
 
-export const deleteTask = async(req, res) => {
+export const deleteTask = async (req, res) => {
     const tasks = await task.findById(req.params.id);
     if (!tasks)
         return res.status(404).json({
